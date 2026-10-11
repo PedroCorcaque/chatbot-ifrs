@@ -5,6 +5,7 @@ import uuid
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import parse_qs, urlencode
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
@@ -19,8 +20,41 @@ from chatbot.summarizer import resumir  # noqa: E402
 app = Flask(__name__)
 app.json.ensure_ascii = False
 
+
+class RoteadorVercel:
+    """Na Vercel, o vercel.json encaminha /api/<rota> para /api/index?rota=<rota>.
+    Este middleware restaura o caminho original antes do Flask escolher a rota,
+    o que funciona independentemente de como o runtime repassa o PATH."""
+
+    def __init__(self, wsgi):
+        self.wsgi = wsgi
+
+    def __call__(self, environ, start_response):
+        qs = parse_qs(environ.get("QUERY_STRING", ""), keep_blank_values=True)
+        rota = qs.pop("rota", [None])[0]
+        if rota is not None:
+            environ["SCRIPT_NAME"] = ""
+            environ["PATH_INFO"] = "/api/" + rota.strip("/")
+            environ["QUERY_STRING"] = urlencode(qs, doseq=True)
+        return self.wsgi(environ, start_response)
+
+
+app.wsgi_app = RoteadorVercel(app.wsgi_app)
+
 faq = FAQ()
 modelo = NaiveBayesSentimento()
+
+
+@app.errorhandler(Exception)
+def erro_geral(e):
+    """Sempre responde em JSON, para a interface mostrar a causa."""
+    from werkzeug.exceptions import HTTPException
+    if isinstance(e, HTTPException):
+        if e.code == 404:
+            return jsonify(erro=f"404: rota '{request.path}' não encontrada."), 404
+        return jsonify(erro=f"{e.code} {e.name}"), e.code
+    app.logger.exception("Erro não tratado")
+    return jsonify(erro=f"Erro interno: {type(e).__name__}: {e}"), 500
 
 
 def _texto(valor, maximo):

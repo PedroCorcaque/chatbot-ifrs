@@ -151,11 +151,19 @@ function el(tag, cls, texto) {
 function rolar() { log.scrollTop = log.scrollHeight; }
 
 async function api(url, corpo) {
-  const r = await fetch(url, corpo ? {
-    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(corpo)
-  } : undefined);
-  const dados = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error(dados.erro || "Algo deu errado. Tente novamente.");
+  let r;
+  try {
+    r = await fetch(url, corpo ? {
+      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(corpo)
+    } : undefined);
+  } catch (e) {
+    throw new Error("Não consegui conectar ao servidor. Abra o chat pelo endereço do servidor (http://localhost:5000), não pelo arquivo HTML.");
+  }
+  const dados = await r.json().catch(() => null);
+  if (!r.ok || !dados) {
+    throw new Error((dados && dados.erro) ||
+      "O servidor respondeu com erro " + r.status + " em " + url + ". Confira se o Flask está rodando e veja o terminal.");
+  }
   return dados;
 }
 

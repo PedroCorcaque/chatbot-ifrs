@@ -1,5 +1,7 @@
 {
-  "rewrites": [{ "source": "/api/(.*)", "destination": "/api/index" }],
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/index?rota=:path*" }
+  ],
   "functions": {
     "api/index.py": { "includeFiles": "{chatbot,data}/**" }
   }
