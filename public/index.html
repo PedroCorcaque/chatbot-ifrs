@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tire suas dúvidas · IFRS Campus Viamão</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
+<style>
+  :root {
+    /* Paleta extraída do pôster do projeto */
+    --lilas: #aa83e9;
+    --lilas-claro: #f4edff;
+    --lilas-borda: #d9c8f7;
+    --roxo: #341b5f;
+    --tinta: #1c1233;
+    --suave: #5e5278;
+    --branco: #ffffff;
+    --vermelho: #c8281e;
+    --pos-bg: #dff3e5; --pos-fg: #0b5a30;
+    --neu-bg: #fff2c2; --neu-fg: #6b5200;
+    --neg-bg: #fbdcd9; --neg-fg: #8e1c14;
+    --fonte: Arial, "Liberation Sans", Helvetica, system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; background: var(--branco); color: var(--tinta);
+    font: 17px/1.55 var(--fonte);
+    padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+  }
+  .app { display: grid; grid-template-columns: 340px minmax(0, 1fr); min-height: 100%; }
+
+  /* faixas de título, como as seções do pôster */
+  .faixa {
+    background: var(--lilas); color: var(--tinta); font-weight: 700;
+    text-transform: uppercase; text-align: center; letter-spacing: .01em;
+    padding: 10px 14px; font-size: 1.05rem; line-height: 1.25;
+  }
+  aside {
+    padding: 28px 24px; border-right: 1px solid var(--lilas-borda);
+    background: var(--lilas-claro); display: flex; flex-direction: column; gap: 24px;
+  }
+  aside .sub { margin: 10px 2px 0; font-size: .95rem; color: var(--suave); text-align: center; }
+  .sugestoes { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .sugestoes button {
+    text-align: left; font: inherit; font-size: .95rem; color: var(--tinta);
+    background: var(--branco); border: 1px solid var(--lilas-borda); border-radius: 10px;
+    padding: 9px 12px; cursor: pointer;
+  }
+  .sugestoes button:hover { border-color: var(--lilas); background: var(--lilas-claro); }
+
+  main { display: flex; flex-direction: column; height: 100vh; height: 100dvh; min-width: 0; }
+  #log { flex: 1; overflow-y: auto; padding: 32px clamp(16px, 5vw, 64px) 12px; display: flex; flex-direction: column; gap: 22px; }
+  .vazio { margin: auto; max-width: 32ch; text-align: center; color: var(--suave); }
+  .vazio strong { display: block; font-size: 1.4rem; color: var(--roxo); margin-bottom: 6px; }
+
+  .msg { max-width: min(68ch, 92%); }
+  .msg.eu {
+    align-self: flex-end; background: var(--lilas); color: var(--tinta);
+    padding: 10px 16px; border-radius: 18px 18px 4px 18px; font-weight: 700;
+  }
+  .msg.bot { align-self: flex-start; }
+  .msg.bot .texto { border-left: 5px solid var(--lilas); padding: 2px 0 2px 16px; }
+  .msg.bot.sem .texto { border-left-color: var(--vermelho); }
+  .msg .tema { display: block; font-size: .85rem; color: var(--suave); margin-bottom: 4px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0 21px; }
+  .chips button {
+    font: inherit; font-size: .9rem; border: 1px solid var(--roxo); color: var(--roxo);
+    background: transparent; border-radius: 999px; padding: 5px 12px; cursor: pointer;
+  }
+  .chips button:hover { background: var(--roxo); color: #fff; }
+
+  .avaliacao {
+    margin: 14px 0 0 21px; padding: 14px; background: var(--lilas-claro);
+    border: 1px solid var(--lilas-borda); border-radius: 12px;
+    animation: abrir .28s ease-out;
+  }
+  @keyframes abrir { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  .avaliacao label { display: block; font-weight: 700; font-size: .95rem; margin-bottom: 8px; }
+  .avaliacao .linha { display: flex; gap: 8px; }
+  .avaliacao input {
+    flex: 1; min-width: 0; font: inherit; padding: 9px 12px; color: var(--tinta);
+    background: var(--branco); border: 1px solid var(--lilas-borda); border-radius: 8px;
+  }
+  .avaliacao .dica { font-size: .82rem; color: var(--suave); margin-top: 6px; }
+  .resultado { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .selo { padding: 3px 12px; border-radius: 999px; font-weight: 700; font-size: .9rem; }
+  .selo.positivo { background: var(--pos-bg); color: var(--pos-fg); }
+  .selo.neutro { background: var(--neu-bg); color: var(--neu-fg); }
+  .selo.negativo { background: var(--neg-bg); color: var(--neg-fg); }
+
+  button.primario {
+    font: 700 1rem var(--fonte); background: var(--roxo); color: #fff; border: 0;
+    border-radius: 8px; padding: 9px 18px; cursor: pointer;
+  }
+  button.primario:hover { filter: brightness(1.25); }
+  button:disabled { opacity: .55; cursor: wait; }
+  :focus-visible { outline: 3px solid var(--roxo); outline-offset: 2px; }
+
+  #form { display: flex; gap: 10px; padding: 14px clamp(16px, 5vw, 64px) 20px; border-top: 1px solid var(--lilas-borda); background: var(--branco); }
+  #form input {
+    flex: 1; min-width: 0; font: inherit; padding: 13px 16px; color: var(--tinta);
+    background: var(--branco); border: 2px solid var(--lilas); border-radius: 12px;
+  }
+  .digitando { color: var(--suave); font-style: italic; }
+
+  .topo-mobile { display: none; }
+  @media (max-width: 820px) {
+    .app { grid-template-columns: 1fr; }
+    aside { display: none; }
+    .topo-mobile { display: block; }
+  }
+  @media (prefers-reduced-motion: reduce) { .avaliacao { animation: none; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div>
+      <div class="faixa">Tire suas dúvidas sobre o campus</div>
+      <p class="sub">IFRS Campus Viamão. As respostas vêm das perguntas frequentes da instituição.</p>
+    </div>
+    <div>
+      <div class="faixa">Perguntas comuns</div>
+      <div class="sugestoes" id="sugestoes"></div>
+    </div>
+  </aside>
+
+  <main>
+    <div class="topo-mobile faixa">Tire suas dúvidas · IFRS Viamão</div>
+    <div id="log" role="log" aria-live="polite">
+      <div class="vazio" id="vazio"><strong>O que você quer saber?</strong>Pergunte sobre matrícula, documentos, auxílios, biblioteca e mais.</div>
+    </div>
+    <form id="form" autocomplete="off">
+      <input id="entrada" type="text" maxlength="500" placeholder="Escreva sua pergunta" aria-label="Sua pergunta" required>
+      <button class="primario" type="submit" id="enviar">Perguntar</button>
+    </form>
+  </main>
+</div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const log = $("#log"), form = $("#form"), entrada = $("#entrada"), botao = $("#enviar");
+
+function el(tag, cls, texto) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (texto !== undefined) e.textContent = texto;
+  return e;
+}
+function rolar() { log.scrollTop = log.scrollHeight; }
+
+async function api(url, corpo) {
+  const r = await fetch(url, corpo ? {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(corpo)
+  } : undefined);
+  const dados = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(dados.erro || "Algo deu errado. Tente novamente.");
+  return dados;
+}
+
+function mensagemUsuario(texto) {
+  $("#vazio")?.remove();
+  log.append(el("div", "msg eu", texto));
+  rolar();
+}
+
+function blocoAvaliacao(dados) {
+  const caixa = el("div", "avaliacao");
+  const f = el("form");
+  const id = "av-" + dados.chat_id;
+  const rotulo = el("label", null, "Como foi essa resposta? Conte em uma frase.");
+  rotulo.htmlFor = id;
+  const linha = el("div", "linha");
+  const campo = el("input"); campo.id = id; campo.type = "text"; campo.maxLength = 300;
+  campo.placeholder = "Ex.: Ajudou, mas faltou um detalhe"; campo.required = true;
+  const ok = el("button", "primario", "Enviar avaliação"); ok.type = "submit";
+  linha.append(campo, ok);
+  f.append(rotulo, linha, el("div", "dica", "Sua frase é lida automaticamente para melhorarmos as respostas."));
+  caixa.append(f);
+
+  f.addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    ok.disabled = true; ok.textContent = "Enviando…";
+    try {
+      const r = await api("/api/avaliacao", {
+        frase: campo.value, chat_id: dados.chat_id, pergunta: dados.pergunta,
+        resposta: dados.resposta, categoria: dados.categoria
+      });
+      const nomes = { positivo: "Avaliação positiva", neutro: "Avaliação neutra", negativo: "Avaliação negativa" };
+      caixa.replaceChildren();
+      const res = el("div", "resultado");
+      res.append(el("strong", null, "Obrigado pelo retorno."), el("span", "selo " + r.sentimento, nomes[r.sentimento]));
+      caixa.append(res);
+    } catch (e) {
+      ok.disabled = false; ok.textContent = "Enviar avaliação";
+      let aviso = f.querySelector(".erro");
+      if (!aviso) { aviso = el("div", "dica erro"); aviso.style.color = "var(--vermelho)"; f.append(aviso); }
+      aviso.textContent = e.message;
+    }
+  });
+  return caixa;
+}
+
+function mensagemBot(d) {
+  const m = el("div", "msg bot" + (d.encontrou ? "" : " sem"));
+  const t = el("div", "texto");
+  if (d.encontrou) t.append(el("span", "tema", "Sobre: " + d.pergunta_correspondente));
+  t.append(el("span", null, d.resposta));
+  m.append(t);
+  if (d.sugestoes?.length) {
+    const chips = el("div", "chips");
+    d.sugestoes.forEach((s) => {
+      const b = el("button", null, s); b.type = "button";
+      b.onclick = () => perguntar(s);
+      chips.append(b);
+    });
+    m.append(chips);
+  }
+  m.append(blocoAvaliacao(d));
+  log.append(m);
+  rolar();
+  m.querySelector("input")?.focus({ preventScroll: true });
+}
+
+async function perguntar(texto) {
+  texto = texto.trim();
+  if (!texto) return;
+  mensagemUsuario(texto);
+  entrada.value = ""; botao.disabled = true;
+  const espera = el("div", "msg bot digitando", "Buscando a resposta…");
+  log.append(espera); rolar();
+  try {
+    mensagemBot(await api("/api/chat", { mensagem: texto }));
+  } catch (e) {
+    log.append(el("div", "msg bot sem", e.message));
+  } finally {
+    espera.remove(); botao.disabled = false;
+  }
+}
+
+form.addEventListener("submit", (e) => { e.preventDefault(); perguntar(entrada.value); });
+
+api("/api/sugestoes").then(({ sugestoes }) => {
+  sugestoes.forEach((s) => {
+    const b = el("button", null, s); b.type = "button";
+    b.onclick = () => perguntar(s);
+    $("#sugestoes").append(b);
+  });
+}).catch(() => {});
+</script>
+</body>
+</html>

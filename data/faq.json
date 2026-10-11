@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "categoria": "matricula",
+    "pergunta": "Como faço a matrícula ou rematrícula?",
+    "palavras_chave": ["matricula", "rematricula", "renovar", "inscrição", "ingresso", "documentos"],
+    "resposta": "A matrícula de ingressantes é feita no período definido na chamada do processo seletivo, com a documentação exigida no edital. A rematrícula dos estudantes veteranos acontece a cada semestre, conforme o calendário acadêmico. Em caso de dúvida, procure o setor de Registros Acadêmicos."
+  },
+  {
+    "id": 2,
+    "categoria": "documentos",
+    "pergunta": "Como solicito histórico escolar ou declaração de matrícula?",
+    "palavras_chave": ["historico", "declaracao", "comprovante", "atestado", "documento", "certificado"],
+    "resposta": "Declarações e históricos são solicitados ao setor de Registros Acadêmicos, presencialmente ou pelos canais oficiais do campus. Informe seu nome completo, curso e matrícula. O prazo de entrega depende do tipo de documento."
+  },
+  {
+    "id": 3,
+    "categoria": "calendario",
+    "pergunta": "Onde encontro o calendário acadêmico?",
+    "palavras_chave": ["calendario", "datas", "feriados", "inicio das aulas", "fim do semestre", "recesso", "prazos"],
+    "resposta": "O calendário acadêmico é publicado no site do campus, na página do seu curso. Nele constam início e fim do período letivo, feriados, recessos e prazos de matrícula, trancamento e avaliações."
+  },
+  {
+    "id": 4,
+    "categoria": "assistencia",
+    "pergunta": "Como solicito auxílio estudantil ou assistência estudantil?",
+    "palavras_chave": ["auxilio", "bolsa", "assistencia", "estudantil", "vulnerabilidade", "transporte", "alimentacao", "financeiro"],
+    "resposta": "Os auxílios são concedidos por meio de editais abertos pela assistência estudantil, que definem critérios, documentos e prazos. Acompanhe a divulgação no site e procure a Assistência Estudantil do campus para orientação sobre a sua situação."
+  },
+  {
+    "id": 5,
+    "categoria": "biblioteca",
+    "pergunta": "Como funciona o empréstimo de livros na biblioteca?",
+    "palavras_chave": ["biblioteca", "livro", "emprestimo", "devolucao", "renovacao", "acervo", "multa"],
+    "resposta": "O empréstimo é feito na biblioteca do campus com o seu vínculo ativo de estudante. O prazo e a quantidade de itens seguem o regulamento da biblioteca, e a renovação pode ser feita se não houver reserva do mesmo título."
+  },
+  {
+    "id": 6,
+    "categoria": "matricula",
+    "pergunta": "Como faço o trancamento de matrícula?",
+    "palavras_chave": ["trancar", "trancamento", "cancelar", "cancelamento", "afastamento", "desistir", "pausa"],
+    "resposta": "O trancamento é solicitado ao setor de Registros Acadêmicos dentro do prazo previsto no calendário acadêmico, mediante requerimento. Converse antes com a coordenação do curso para entender o impacto no seu percurso e o tempo máximo permitido."
+  },
+  {
+    "id": 7,
+    "categoria": "estagio",
+    "pergunta": "Como funciona o estágio?",
+    "palavras_chave": ["estagio", "estagiar", "empresa", "termo de compromisso", "estagio obrigatorio", "supervisor"],
+    "resposta": "O estágio exige termo de compromisso entre estudante, empresa e instituição, firmado antes do início das atividades. Procure a coordenação de estágios ou a coordenação do curso para conhecer os requisitos, a carga horária e os documentos necessários."
+  },
+  {
+    "id": 8,
+    "categoria": "informatica",
+    "pergunta": "Como acesso o Wi-Fi e o e-mail institucional?",
+    "palavras_chave": ["wifi", "wi-fi", "internet", "rede", "email", "senha", "acesso", "login", "conta", "ti"],
+    "resposta": "O acesso à rede sem fio e ao e-mail institucional usa a conta criada para o estudante. Se for o primeiro acesso ou você esqueceu a senha, procure o setor de Tecnologia da Informação do campus."
+  },
+  {
+    "id": 9,
+    "categoria": "ensino",
+    "pergunta": "Como peço aproveitamento de estudos de disciplinas já cursadas?",
+    "palavras_chave": ["aproveitamento", "dispensa", "disciplina", "cursada", "equivalencia", "ementa", "outra instituicao"],
+    "resposta": "O aproveitamento é solicitado com requerimento, histórico escolar e ementas das disciplinas cursadas. A coordenação do curso analisa a equivalência de conteúdo e carga horária dentro dos prazos do calendário acadêmico."
+  },
+  {
+    "id": 10,
+    "categoria": "ingresso",
+    "pergunta": "Como funciona o ingresso por processo seletivo ou Enem?",
+    "palavras_chave": ["ingresso", "processo seletivo", "enem", "sisu", "vagas", "cotas", "edital", "inscricao", "vestibular"],
+    "resposta": "O ingresso é regulado por editais divulgados no site do IFRS, que informam vagas, cotas, datas e documentos. Leia o edital vigente do curso desejado e acompanhe as chamadas publicadas."
+  },
+  {
+    "id": 11,
+    "categoria": "pesquisa",
+    "pergunta": "Como participo de projetos de pesquisa, extensão ou monitoria?",
+    "palavras_chave": ["pesquisa", "extensao", "monitoria", "iniciacao cientifica", "bolsa", "projeto", "professor", "orientador"],
+    "resposta": "Projetos de pesquisa, extensão e monitoria são divulgados por editais e pelos próprios professores. Converse com docentes da sua área ou com a coordenação de pesquisa e extensão e acompanhe os prazos de seleção."
+  },
+  {
+    "id": 12,
+    "categoria": "atendimento",
+    "pergunta": "Como falo com a coordenação do meu curso?",
+    "palavras_chave": ["coordenacao", "coordenador", "contato", "atendimento", "falar", "email", "horario", "secretaria"],
+    "resposta": "O contato com a coordenação do curso pode ser feito pelo e-mail institucional ou presencialmente, no horário de atendimento divulgado no site do campus. Para assuntos acadêmicos, descreva sua dúvida e informe sua matrícula."
+  },
+  {
+    "id": 13,
+    "categoria": "ensino",
+    "pergunta": "Como funciona a recuperação, a reprovação e a frequência mínima?",
+    "palavras_chave": ["recuperacao", "reprovacao", "reprovado", "falta", "frequencia", "nota", "media", "aprovacao", "prova"],
+    "resposta": "Os critérios de aprovação, recuperação e frequência mínima constam na organização didática da instituição e no plano de ensino de cada disciplina. Consulte esses documentos e, se necessário, a coordenação do curso."
+  }
+]

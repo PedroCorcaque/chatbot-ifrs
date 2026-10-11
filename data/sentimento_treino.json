@@ -1,0 +1,290 @@
+[
+ {
+  "texto": "Ótima resposta, me ajudou muito",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Muito clara e objetiva",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Excelente, resolveu minha dúvida",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Gostei bastante da resposta",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Resposta rápida e útil",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Perfeito, obrigado",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Foi exatamente o que eu precisava",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Muito bom, entendi tudo",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Explicação clara e completa",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Adorei, super prático",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Resposta ótima, muito útil",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Bem explicado, ajudou bastante",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Maravilhoso, consegui resolver",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Muito satisfeito com o atendimento",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Resposta correta e direta",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Simples e eficiente, gostei",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Ajudou muito, valeu",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Esclareceu minha dúvida rapidamente",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Boa resposta, muito bem escrita",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Fantástico, recomendo",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Gostei muito, foi bem útil",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Achei excelente e fácil de entender",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Deu certo, obrigada pela ajuda",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Muito prestativo e claro",
+  "rotulo": "positivo"
+ },
+ {
+  "texto": "Resposta ruim, não ajudou em nada",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Não entendi nada",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Péssimo, não respondeu minha pergunta",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Resposta errada",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Muito confusa e incompleta",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Inútil, perdi meu tempo",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Não era isso que eu perguntei",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Muito ruim",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Informação desatualizada e vaga",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Não resolveu meu problema",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Horrível, não gostei",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "A resposta não faz sentido",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Decepcionante, esperava mais",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Não ajudou, continuo com a dúvida",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Resposta genérica e sem utilidade",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Não gostei da resposta",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Péssima explicação, nada claro",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Não consegui resolver nada",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Resposta fraca e superficial",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Não foi útil, muito ruim",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Demorou e a resposta veio errada",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Confuso demais, não serviu",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Terrível, não recomendo",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Não respondeu o que eu queria saber",
+  "rotulo": "negativo"
+ },
+ {
+  "texto": "Resposta ok",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Mais ou menos",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Razoável",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Nem boa nem ruim",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Entendi parcialmente",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Poderia ter mais detalhes",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Normal",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Regular",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Atende o básico",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Achei mediana",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Gostaria de mais exemplos",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Resposta comum",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Tudo bem, sem opinião",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Foi aceitável",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Pode melhorar um pouco",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Esperava um pouco mais de informação",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Ajudou em parte",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Dá para entender, mas é simples",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Resposta padrão",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Nada demais, mas serve",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Cumpre o papel",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Mediano",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Preciso de mais informações depois",
+  "rotulo": "neutro"
+ },
+ {
+  "texto": "Foi ok, nada especial",
+  "rotulo": "neutro"
+ }
+]

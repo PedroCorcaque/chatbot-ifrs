@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Painel de avaliações</title>
+<style>
+  :root { --lilas:#aa83e9; --lilas-claro:#f4edff; --lilas-borda:#d9c8f7; --roxo:#341b5f; --tinta:#1c1233; --suave:#5e5278; --vermelho:#c8281e; }
+  body { margin:0; padding:0 0 40px; background:#fff; color:var(--tinta); font:17px/1.55 Arial,"Liberation Sans",Helvetica,sans-serif; }
+  .faixa { background:var(--lilas); color:var(--tinta); font-weight:700; text-transform:uppercase; text-align:center; padding:12px 14px; margin:0; font-size:1.15rem; }
+  .conteudo { padding:0 clamp(16px,5vw,64px); }
+  h2 { margin:28px 0 12px; background:var(--lilas); padding:8px 12px; font-size:1rem; text-transform:uppercase; text-align:center; }
+  .linha { display:flex; gap:8px; margin:16px 0; flex-wrap:wrap; }
+  input { font:inherit; padding:9px 12px; border:2px solid var(--lilas); border-radius:8px; background:#fff; color:inherit; }
+  button { font:inherit; font-weight:700; padding:9px 18px; border:0; border-radius:8px; background:var(--roxo); color:#fff; cursor:pointer; }
+  .grade { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+  .bloco { border:1px solid var(--lilas-borda); background:var(--lilas-claro); border-radius:12px; padding:14px 16px; }
+  .bloco h3 { margin:0 0 6px; } .bloco ul { margin:0; padding-left:18px; }
+  .positivo h3 { color:#0b5a30; } .neutro h3 { color:#6b5200; } .negativo h3 { color:#8e1c14; }
+  table { border-collapse:collapse; width:100%; } td,th { text-align:left; padding:8px; border-bottom:1px solid var(--lilas-borda); vertical-align:top; }
+  .suave { color:var(--suave); } #erro { color:var(--vermelho); }
+  :focus-visible { outline:3px solid var(--roxo); outline-offset:2px; }
+</style>
+</head>
+<body>
+<h1 class="faixa">Painel de avaliações</h1>
+<div class="conteudo">
+<p class="suave" style="margin-top:16px">Classificação de sentimento e resumo extrativo (TextRank) das frases enviadas pelos estudantes.</p>
+<form class="linha" id="f">
+  <input type="password" id="token" placeholder="Token de administrador" aria-label="Token de administrador" required>
+  <button type="submit">Carregar dados</button>
+</form>
+<div id="erro"></div>
+<div id="saida" hidden>
+  <p><strong id="total"></strong> <span class="suave" id="modo"></span></p>
+  <h2>Resumo por sentimento</h2>
+  <div class="grade" id="resumos"></div>
+  <h2>Avaliações recentes</h2>
+  <table><thead><tr><th>Sentimento</th><th>Frase</th><th>Pergunta</th></tr></thead><tbody id="recentes"></tbody></table>
+</div>
+</div>
+<script>
+const $ = (s) => document.querySelector(s);
+function el(t, c, x) { const e = document.createElement(t); if (c) e.className = c; if (x !== undefined) e.textContent = x; return e; }
+$("#f").addEventListener("submit", async (ev) => {
+  ev.preventDefault(); $("#erro").textContent = "";
+  try {
+    const r = await fetch("/api/admin/resumo", { headers: { "X-Admin-Token": $("#token").value } });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.erro || "Erro ao carregar.");
+    $("#saida").hidden = false;
+    const dist = d.distribuicao || {};
+    $("#total").textContent = d.total + " avaliações (" +
+      ["positivo","neutro","negativo"].map(k => (dist[k]||0) + " " + k + "s").join(", ") + ")";
+    $("#modo").textContent = d.armazenamento === "redis" ? "" : "· armazenamento temporário: configure o Redis para guardar os dados";
+    const box = $("#resumos"); box.replaceChildren();
+    for (const k of ["positivo","neutro","negativo"]) {
+      const b = el("div", "bloco " + k); b.append(el("h3", null, k[0].toUpperCase() + k.slice(1)));
+      const ul = el("ul"); (d.resumos[k] || []).forEach(s => ul.append(el("li", null, s)));
+      if (!ul.children.length) ul.append(el("li", "suave", "Sem dados ainda."));
+      b.append(ul); box.append(b);
+    }
+    const tb = $("#recentes"); tb.replaceChildren();
+    (d.recentes || []).forEach(x => {
+      const tr = el("tr"); tr.append(el("td", null, x.sentimento), el("td", null, x.frase), el("td", "suave", x.pergunta)); tb.append(tr);
+    });
+  } catch (e) { $("#erro").textContent = e.message; }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+pyyaml
+typeguard
+Flask>=3.0,<4
